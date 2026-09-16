@@ -1,0 +1,3 @@
+# Ace / Cikgu AI companion components.
+# Port from Junior src/companion/ during Batch 3 — Gamification phase.
+# Reference: AICompanionButton (A — REUSE), CikguAIPanel (B — ADAPT)

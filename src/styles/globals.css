@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/*
+  AcadeMY Senior — Global Styles
+  Design tokens mirror Junior's Nova palette exactly.
+  Tailwind v4: no tailwind.config.js — all tokens defined here via @theme inline.
+  Reference: docs/JUNIOR_COMPATIBILITY_AUDIT.md §2.7
+*/
+
+@theme inline {
+  /* ── Typography ───────────────────────────────────────────────────── */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-sans: var(--font-body);
+
+  /* ── Brand colours (Nova palette — confirmed from Junior src/styles.css) ── */
+  --color-nova-purple: #8b5cf6;
+  --color-nova-blue: #3b82f6;
+  --color-nova-yellow: #facc15;
+  --color-nova-navy: #0d1117;
+  --color-nova-slate: #161b22;
+
+  /* ── Brand tokens (TBD-008: exact palette pending brand guide) ──────── */
+  --color-brand-primary: var(--color-nova-purple);
+  --color-brand-secondary: var(--color-nova-blue);
+
+  /* ── Surface tokens ──────────────────────────────────────────────── */
+  --color-surface-base: var(--color-nova-navy);
+  --color-surface-raised: var(--color-nova-slate);
+
+  /* ── Text tokens ─────────────────────────────────────────────────── */
+  --color-text-primary: #f0f6fc;
+  --color-text-secondary: #8b949e;
+  --color-text-disabled: #484f58;
+
+  /* ── Semantic tokens ─────────────────────────────────────────────── */
+  --color-semantic-success: #3fb950;
+  --color-semantic-warning: #d29922;
+  --color-semantic-error: #f85149;
+
+  /* ── XP / progress accent (TBD-008) ─────────────────────────────── */
+  --color-xp-accent: var(--color-nova-yellow);
+
+  /* ── Mobile nav height (matches Junior AppShell) ─────────────────── */
+  --mobile-nav-height: 72px;
+}
+
+/* ── CSS custom properties on :root (runtime tokens) ──────────────────── */
+:root {
+  --background: oklch(0.18 0.04 265);       /* #0d1117 — Nova navy */
+  --foreground: #f0f6fc;
+  --foreground-muted: #8b949e;
+  --surface-raised: #161b22;                /* Nova slate */
+  --nova-purple: #8b5cf6;
+  --nova-blue: #3b82f6;
+  --nova-yellow: #facc15;
+  --nova-navy: #0d1117;
+  --nova-slate: #161b22;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --mobile-nav-height: 72px;
+}
+
+/* ── Base resets ─────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Prevent layout shift from scrollbar appearing */
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--nova-navy);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+}
+
+/* ── Heading typeface ────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* ── Focus visible — never remove focus indicators ──────────────────── */
+:focus-visible {
+  outline: 2px solid var(--nova-purple);
+  outline-offset: 2px;
+}

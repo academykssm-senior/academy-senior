@@ -1,0 +1,3 @@
+# Progress feature — XP, ranks, streaks.
+# Central hook: use-progress.ts (port from Junior, change storage key).
+# Port during Batch 3 — Progress and Gamification phase.
