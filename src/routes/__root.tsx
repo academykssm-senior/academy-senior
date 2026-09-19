@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import {
   createRootRoute,
   HeadContent,
@@ -12,7 +11,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#0d1117" },
+      { name: "theme-color", content: "#10131b" },
       { title: "AcadeMY Senior" },
       {
         name: "description",
@@ -31,14 +30,14 @@ export const Route = createRootRoute({
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@300..700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
       },
     ],
   }),
   component: RootDocument,
 });
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+function RootDocument() {
   return (
     <html lang="en">
       <head>

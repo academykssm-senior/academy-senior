@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
-/*
-  AcadeMY Senior — Global Styles
-  Design tokens mirror Junior's Nova palette exactly.
-  Tailwind v4: no tailwind.config.js — all tokens defined here via @theme inline.
-  Reference: docs/JUNIOR_COMPATIBILITY_AUDIT.md §2.7
-*/
+/* AcadeMY Senior global styles. Tailwind v4 tokens live in this file. */
 
 @theme inline {
   /* ── Typography ───────────────────────────────────────────────────── */
@@ -41,7 +36,36 @@
   /* ── XP / progress accent (TBD-008) ─────────────────────────────── */
   --color-xp-accent: var(--color-nova-yellow);
 
-  /* ── Mobile nav height (matches Junior AppShell) ─────────────────── */
+  /* Stitch: Midnight Orbital Mastery */
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --color-surface: #10131b;
+  --color-bg-elevated: #0f1220;
+  --color-surface-card: #151827;
+  --color-surface-container-lowest: #0b0e15;
+  --color-surface-container-low: #181b23;
+  --color-surface-container: #1d2027;
+  --color-surface-container-high: #272a32;
+  --color-surface-bright: #363941;
+  --color-on-surface: #e0e2ed;
+  --color-on-surface-variant: #cbc3d7;
+  --color-outline: #958ea0;
+  --color-border-subtle: rgb(139 92 246 / 18%);
+  --color-primary: #d0bcff;
+  --color-on-primary: #3c0091;
+  --color-primary-container: #a078ff;
+  --color-on-primary-container: #340080;
+  --color-primary-fixed-dim: #d0bcff;
+  --color-secondary: #ddb7ff;
+  --color-secondary-container: #6f00be;
+  --color-tertiary: #c0c1ff;
+  --color-tertiary-container: #8083ff;
+  --color-status-mastered: #10b981;
+  --color-status-review: #f59e0b;
+  --shadow-card: 0 8px 28px rgb(0 0 0 / 28%);
+  --shadow-primary: 0 0 24px rgb(160 120 255 / 25%);
+
+  /* ── Mobile nav height ───────────────────────────────────────────── */
   --mobile-nav-height: 72px;
 }
 
@@ -56,8 +80,10 @@
   --nova-yellow: #facc15;
   --nova-navy: #0d1117;
   --nova-slate: #161b22;
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --surface-container: #1d2027;
+  --status-mastered: #10b981;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
   --mobile-nav-height: 72px;
 }
 
@@ -71,15 +97,17 @@
 html {
   /* Prevent layout shift from scrollbar appearing */
   scrollbar-gutter: stable;
+  background: #10131b;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--nova-navy);
+  background-color: #10131b;
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100dvh;
+  margin: 0;
 }
 
 /* ── Heading typeface ────────────────────────────────────────────────── */
@@ -89,6 +117,47 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Focus visible — never remove focus indicators ──────────────────── */
 :focus-visible {
-  outline: 2px solid var(--nova-purple);
+  outline: 2px solid #d0bcff;
   outline-offset: 2px;
+}
+
+::selection {
+  background: #a078ff;
+  color: #340080;
+}
+
+.cosmic-shell {
+  background-color: #070b1c;
+}
+
+.subject-world-card {
+  background: #11172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.subject-world-art {
+  transition: transform 200ms ease;
+}
+
+.subject-world-card--active:hover {
+  border-color: color-mix(in srgb, var(--subject-accent) 50%, rgba(255, 255, 255, 0.10));
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.28),
+    0 0 16px color-mix(in srgb, var(--subject-accent) 18%, transparent);
+}
+
+.subject-world-card--active:hover .subject-world-art {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .subject-world-art,
+  .subject-world-card--active:hover .subject-world-art {
+    transition: none;
+    transform: none;
+  }
 }

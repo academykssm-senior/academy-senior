@@ -11,6 +11,11 @@ export function getRouter() {
     routeTree,
     defaultPreload: "intent",
     scrollRestoration: true,
+    defaultNotFoundComponent: () => (
+      <main className="flex min-h-dvh items-center justify-center px-6 text-text-secondary">
+        <p>Page not found</p>
+      </main>
+    ),
   });
 }
 
