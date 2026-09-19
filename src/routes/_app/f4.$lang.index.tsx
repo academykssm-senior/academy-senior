@@ -15,7 +15,7 @@ function Form4SubjectsPage() {
   const form = getForm(4);
   const subjects = listSubjects(4, lang);
   const title = lang === "bm" ? (form?.nameBm ?? "Tingkatan 4") : (form?.nameEn ?? "Form 4");
-  const otherLang = lang === "bm" ? "dlp" : "bm";
+  const otherLang = lang === "bm" ? "en" : "bm";
 
   return (
     <div>

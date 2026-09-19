@@ -23,7 +23,7 @@ export function DashboardHero({ lang }: { lang: LanguageStream }) {
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-500 px-5 text-sm font-bold text-white shadow-primary"
-            params={{ lang, subject: "chemistry", chapter: "atomic-structure" }}
+            params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
             to="/f4/$lang/$subject/$chapter"
           >
             Continue Learning

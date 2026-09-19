@@ -1,9 +1,8 @@
 import type { CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
-import { listChapters } from "@/content/catalogue";
-import { subjectWorldThemes, type SubjectWorldTheme } from "@/content/mock/dashboard";
+import { listChapters, listSubjectManifests } from "@/content/catalogue";
 import { cn } from "@/lib/utils";
-import type { LanguageStream, SubjectView } from "@/types/curriculum";
+import type { LanguageStream, SubjectManifest, SubjectView } from "@/types/curriculum";
 
 type SubjectWorldsProps = {
   lang: LanguageStream;
@@ -22,7 +21,7 @@ function hexToRgbChannels(hex: string): string {
 }
 
 export function SubjectWorlds({ lang, subjects }: SubjectWorldsProps) {
-  const visibleSubjects = subjectWorldThemes.filter((subject) => subject.visible);
+  const manifests = listSubjectManifests(4);
 
   return (
     <section>
@@ -43,10 +42,8 @@ export function SubjectWorlds({ lang, subjects }: SubjectWorldsProps) {
       </div>
 
       <div className="grid grid-cols-1 gap-4 min-[360px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {visibleSubjects.map((subjectConfig) => {
-          const routedSubject = subjects.find(
-            (subject) => subject.slug === subjectConfig.slug,
-          );
+        {manifests.map((manifest) => {
+          const routedSubject = subjects.find((subject) => subject.slug === manifest.id);
           const chapters = routedSubject
             ? listChapters(4, routedSubject.slug, lang)
             : [];
@@ -54,10 +51,10 @@ export function SubjectWorlds({ lang, subjects }: SubjectWorldsProps) {
           return (
             <SubjectWorldCard
               chaptersAvailable={chapters.length}
-              key={subjectConfig.slug}
+              key={manifest.id}
               lang={lang}
-              routeSlug={routedSubject?.slug}
-              subject={subjectConfig}
+              routeSlug={chapters.length > 0 ? routedSubject?.slug : undefined}
+              subject={manifest}
             />
           );
         })}
@@ -67,7 +64,7 @@ export function SubjectWorlds({ lang, subjects }: SubjectWorldsProps) {
 }
 
 type SubjectWorldCardProps = {
-  subject: SubjectWorldTheme;
+  subject: SubjectManifest;
   lang: LanguageStream;
   routeSlug?: string | undefined;
   chaptersAvailable: number;
@@ -88,6 +85,7 @@ function SubjectWorldCard({
     "subject-world-card flex h-full flex-col overflow-hidden text-white",
     isAvailable && "subject-world-card--active group",
   );
+  const description = subject.descriptionEn ?? subject.descriptionBm ?? "";
 
   const body = (
     <>
@@ -96,8 +94,8 @@ function SubjectWorldCard({
           alt=""
           className="subject-world-art absolute -top-1 left-0 h-[calc(100%+8px)] w-full object-cover"
           loading="lazy"
-          src={subject.image}
-          style={{ objectPosition: subject.objectPosition ?? "center center" }}
+          src={subject.artwork}
+          style={{ objectPosition: subject.artworkPosition ?? "center center" }}
         />
         <div
           aria-hidden="true"
@@ -120,7 +118,7 @@ function SubjectWorldCard({
           {subject.name}
         </h3>
         <p className="mt-1 line-clamp-2 min-h-[2.5rem] text-[11px] leading-relaxed text-white/55 sm:text-xs">
-          {subject.description}
+          {description}
         </p>
 
         <div className="mt-auto flex min-h-[1.25rem] items-center justify-between gap-2 pt-4">

@@ -13,6 +13,37 @@ Unresolved questions are marked **TBD**.
 
 ---
 
+## Identifiers: UUID vs slug
+
+Database records use **two identities**. They are not interchangeable.
+
+| Identity | Where it lives | Purpose |
+|---|---|---|
+| UUID | Supabase primary / foreign keys | Relational identity, joins, RLS |
+| Stable slug | Manifests, routes, application code | Public / curriculum identity |
+
+**Rule:** Routes, curriculum manifests, and application code use stable slugs (`chemistry`, `chapter-02`). Supabase relational tables use UUID primary keys and UUID foreign keys.
+
+Do **not** replace app slugs with UUIDs.  
+Do **not** expose UUIDs in student-facing routes.
+
+Example:
+
+```
+Subject
+  id   = UUID          (database)
+  slug = "chemistry"   (app / public)
+
+Chapter
+  id         = UUID
+  subject_id = UUID    (FK → Subject.id)
+  slug       = "chapter-02"
+```
+
+Progress and content loading in the application still address work by slug identity (`form` + `subjectId` + `chapterId` + `toolId` + `activityId` + `language`). A later database row may store both the UUID and a copy of those slugs, or resolve slugs to UUIDs at write time.
+
+---
+
 ## Data Boundary: Shared Identity vs. Senior-Specific
 
 A core principle is that **who a student is** (identity) is separate from **what a student has done in Senior** (learning data). This separation enables a future shared AcadeMY identity across Junior and Senior without merging application-specific data.
@@ -60,7 +91,7 @@ Student-facing identity and preferences.
 | display_name | string | Student's chosen name |
 | avatar_url | string (nullable) | Profile image URL |
 | form_level | enum: 4, 5 | Current form year |
-| language_preference | enum: BM, DLP | Stream preference |
+| language_preference | enum: bm, en | Application language ids. DLP is the student-facing label for `en` |
 | created_at | timestamp | |
 | updated_at | timestamp | |
 
@@ -76,10 +107,11 @@ A curriculum subject (e.g. Matematik, Biology, Physics).
 | Field | Type | Notes |
 |---|---|---|
 | id | uuid | Primary key |
+| slug | string | Unique public id (`chemistry`). Used in routes and manifests |
 | name_bm | string | Subject name in BM |
 | name_en | string | Subject name in English (DLP) |
 | form_level | enum: 4, 5 | Which form this subject belongs to |
-| language_stream | enum: BM, DLP, both | Which stream(s) this subject serves |
+| language_stream | enum: BM, DLP, both | Display stream; app language ids remain `bm` / `en` |
 | icon_url | string (nullable) | Visual icon for the subject card |
 | sort_order | integer | Display ordering |
 | is_active | boolean | Whether visible to students |
@@ -91,6 +123,7 @@ A chapter within a subject.
 |---|---|---|
 | id | uuid | Primary key |
 | subject_id | uuid | FK → Subject.id |
+| slug | string | Unique per subject (`chapter-02`). Used in routes and manifests |
 | title_bm | string | Chapter title in BM |
 | title_en | string | Chapter title in English |
 | chapter_number | integer | Ordering within the subject |

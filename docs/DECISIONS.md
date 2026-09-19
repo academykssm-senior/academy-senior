@@ -118,6 +118,13 @@ Each entry follows this format:
 - **Decision:** No change — code, schema, environment variable, deployment, or configuration — may be made to the Junior production system as part of Senior development work. This applies even if access technically exists.
 - **Consequences:** Enforced in AGENTS.md. Any cross-application action requires explicit written approval that names the specific action and the system it affects.
 
+### ADR-014: Senior curriculum hierarchy and stable identifiers
+- **Status:** Confirmed
+- **Date:** 2026-09-19
+- **Context:** Form 4 and Form 5 need one reusable learning architecture. Subject-specific apps, mixed chapter slug styles, and bundling heavy content into catalogue files would not scale.
+- **Decision:** AcadeMY Senior uses a single hierarchy — Form → Subject → Chapter → Learning Tool → Activity — with stable kebab-case ids (`chemistry`, `chapter-02`, `quiz`, `set-a`). Canonical content languages are `bm` and `en`. Curriculum manifests hold metadata only; learning datasets load separately later. Notes is typed but postponed. Form 5 must reuse this architecture. Current TanStack routes `/f4/$lang/...` are preserved; `dlp` remains a legacy alias for `en`.
+- **Consequences:** New subjects and chapters follow `src/curriculum/` manifests and `docs/SENIOR_ARCHITECTURE.md`. Do not create per-subject page files. Do not put quiz/flashcard/mind-map datasets in manifests.
+
 ---
 
 ## TBD Decisions

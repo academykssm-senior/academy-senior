@@ -45,7 +45,7 @@ export function ContinueMasteringCard({ lang }: ContinueMasteringCardProps) {
 
         <Link
           className="mt-5 flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-primary px-4 font-semibold text-on-primary shadow-primary transition hover:-translate-y-0.5 hover:bg-primary-fixed-dim motion-reduce:transform-none"
-          params={{ lang, subject: "chemistry", chapter: "atomic-structure" }}
+          params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
           to="/f4/$lang/$subject/$chapter"
         >
           Continue Revision

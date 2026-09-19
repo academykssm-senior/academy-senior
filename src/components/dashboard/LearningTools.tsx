@@ -24,7 +24,7 @@ export function LearningTools({ lang }: { lang: LanguageStream }) {
             params={{
               lang,
               subject: "chemistry",
-              chapter: "atomic-structure",
+              chapter: "chapter-01",
             }}
             to={toolRoutes[tool.id]}
           >

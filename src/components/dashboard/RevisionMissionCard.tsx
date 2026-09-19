@@ -47,7 +47,7 @@ export function RevisionMissionCard({ lang }: RevisionMissionCardProps) {
 
       <Link
         className="mt-3 flex min-h-11 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-container to-secondary-container px-4 text-sm font-semibold text-white shadow-primary transition hover:brightness-110"
-        params={{ lang, subject: "chemistry", chapter: "atomic-structure" }}
+        params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
         to="/f4/$lang/$subject/$chapter"
       >
         <Icon name="play_arrow" className="text-lg" />

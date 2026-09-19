@@ -24,7 +24,7 @@ export function NextGoalCard({ lang }: { lang: LanguageStream }) {
       </div>
       <Link
         className="mt-5 flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-400 to-violet-400 px-4 text-sm font-bold text-white shadow-primary transition hover:brightness-110"
-        params={{ lang, subject: "chemistry", chapter: "atomic-structure" }}
+        params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
         to="/f4/$lang/$subject/$chapter"
       >
         Continue Learning

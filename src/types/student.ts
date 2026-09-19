@@ -1,4 +1,4 @@
-import type { FormLevel, LanguageStream } from "@/types/curriculum";
+import type { ContentLanguage, FormLevel } from "@/types/curriculum";
 
 /**
  * Global AcadeMY student display model.
@@ -12,7 +12,7 @@ export type StudentCompanion = {
 export type StudentProfile = {
   displayName: string;
   formLevel: FormLevel;
-  languagePreference: LanguageStream;
+  languagePreference: ContentLanguage;
   totalXp: number;
   streakDays: number;
   companion: StudentCompanion;

@@ -20,19 +20,19 @@ export function AppShell({ children }: AppShellProps) {
           <DesktopLink
             icon="hub"
             label="Mind Maps"
-            params={{ lang, subject: "chemistry", chapter: "atomic-structure" }}
+            params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
             to="/f4/$lang/$subject/$chapter/mind-map"
           />
           <DesktopLink
             icon="quiz"
             label="Quizzes"
-            params={{ lang, subject: "chemistry", chapter: "atomic-structure" }}
+            params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
             to="/f4/$lang/$subject/$chapter/quiz"
           />
           <DesktopLink
             icon="style"
             label="Flashcards"
-            params={{ lang, subject: "chemistry", chapter: "atomic-structure" }}
+            params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
             to="/f4/$lang/$subject/$chapter/flashcards"
           />
           <DesktopItem icon="smart_toy" label="Ace" />
@@ -171,7 +171,7 @@ function DesktopLink({
   const activityParams = params ?? {
     lang: mockStudent.languagePreference,
     subject: "chemistry",
-    chapter: "atomic-structure",
+    chapter: "chapter-01",
   };
 
   return (
