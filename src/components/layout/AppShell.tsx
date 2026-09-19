@@ -17,6 +17,7 @@ export function AppShell({ children }: AppShellProps) {
         <nav aria-label="Desktop primary" className="mt-8 space-y-1">
           <DesktopLink icon="home" label="Home" to="/dashboard" />
           <DesktopLink icon="dashboard" label="Dashboard" to="/dashboard" />
+          <DesktopLink icon="leaderboard" label="Leaderboard" to="/leaderboard" />
           <DesktopLink
             icon="hub"
             label="Mind Maps"
@@ -83,6 +84,13 @@ export function AppShell({ children }: AppShellProps) {
           <div className="flex items-center gap-2">
             <Metric compactLabel={`${mockStudent.streakDays}`} icon="local_fire_department" label={`${mockStudent.streakDays} Day Streak`} tone="review" />
             <Metric compactLabel={`${mockStudent.totalXp.toLocaleString()} XP`} icon="bolt" label={`${mockStudent.totalXp.toLocaleString()} XP`} tone="primary" />
+            <Link
+              aria-label="Leaderboard"
+              className="grid h-11 w-11 place-items-center rounded-full bg-white/5 text-on-surface-variant [&.active]:bg-violet-500/20 [&.active]:text-white lg:hidden"
+              to="/leaderboard"
+            >
+              <Icon name="leaderboard" className="text-xl" />
+            </Link>
             <button aria-label="Notifications" className="grid h-11 w-11 place-items-center rounded-full bg-white/5 text-on-surface-variant" type="button">
               <Icon name="notifications" className="text-xl" />
             </button>
@@ -154,15 +162,15 @@ function DesktopLink({
 }: {
   icon: string;
   label: string;
-  to: "/dashboard" | "/f4/$lang/$subject/$chapter/mind-map" | "/f4/$lang/$subject/$chapter/quiz" | "/f4/$lang/$subject/$chapter/flashcards";
+  to: "/dashboard" | "/leaderboard" | "/f4/$lang/$subject/$chapter/mind-map" | "/f4/$lang/$subject/$chapter/quiz" | "/f4/$lang/$subject/$chapter/flashcards";
   params?: { lang: typeof mockStudent.languagePreference; subject: string; chapter: string };
 }) {
   const className =
     "flex items-center gap-3 rounded-2xl px-4 py-3 text-sm text-on-surface-variant transition hover:bg-white/5 hover:text-white [&.active]:bg-violet-500/20 [&.active]:font-semibold [&.active]:text-white";
 
-  if (to === "/dashboard") {
+  if (to === "/dashboard" || to === "/leaderboard") {
     return (
-      <Link className={className} to="/dashboard">
+      <Link className={className} to={to}>
         <Icon name={icon} className="text-xl" /> {label}
       </Link>
     );
