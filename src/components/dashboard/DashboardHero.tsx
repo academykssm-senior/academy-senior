@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
-import { mockStudent } from "@/content/mock/student";
 import type { LanguageStream } from "@/types/curriculum";
 
-export function DashboardHero({ lang }: { lang: LanguageStream }) {
+export function DashboardHero({ displayName, lang }: { displayName: string; lang: LanguageStream }) {
   return (
     <section className="relative mb-6 overflow-hidden rounded-[28px] min-h-[220px] sm:min-h-[280px] lg:mb-8 lg:min-h-[340px]">
       <img
@@ -15,14 +14,14 @@ export function DashboardHero({ lang }: { lang: LanguageStream }) {
       <div className="relative z-10 flex min-h-[220px] flex-col justify-end p-5 sm:min-h-[280px] sm:p-8 lg:min-h-[340px]">
         <p className="text-sm text-white/80">Good afternoon,</p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight text-white lg:text-5xl">
-          {mockStudent.displayName} 👋
+          {displayName} 👋
         </h1>
         <p className="mt-2 max-w-md text-sm text-white/80">
           Small steps today, big futures tomorrow.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-violet-500 px-5 text-sm font-bold text-white shadow-primary"
+            className="senior-cta inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-bold"
             params={{ lang, subject: "chemistry", chapter: "chapter-01" }}
             to="/f4/$lang/$subject/$chapter"
           >

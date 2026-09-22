@@ -5,7 +5,7 @@ export type DashboardSubject = {
   icon: string;
   chapters: number;
   mastery: number;
-  accent: "purple" | "indigo" | "emerald";
+  accent: "gold" | "indigo" | "emerald";
 };
 
 export type MasteryTopic = {
@@ -16,7 +16,7 @@ export type MasteryTopic = {
 
 export const dashboardSubjects: readonly DashboardSubject[] = [
   { slug: "biology", icon: "biotech", chapters: 2, mastery: 81, accent: "emerald" },
-  { slug: "chemistry", icon: "science", chapters: 1, mastery: 72, accent: "purple" },
+  { slug: "chemistry", icon: "science", chapters: 1, mastery: 72, accent: "gold" },
   { slug: "mathematics", icon: "functions", chapters: 1, mastery: 64, accent: "indigo" },
 ];
 

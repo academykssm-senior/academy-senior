@@ -4,90 +4,126 @@
 
 @theme inline {
   /* ── Typography ───────────────────────────────────────────────────── */
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-sans: var(--font-body);
 
-  /* ── Brand colours (Nova palette — confirmed from Junior src/styles.css) ── */
+  /* ── Senior cinematic palette (ADR-016) ──────────────────────────── */
+  --color-senior-navy: #070b14;
+  --color-senior-midnight: #0b1020;
+  --color-senior-slate: #141a2a;
+  --color-senior-gold: #e8b84a;
+  --color-senior-champagne: #e4c98a;
+  --color-senior-silver: #9eb3c7;
+
+  /* Legacy Junior names kept so existing utilities do not break. */
   --color-nova-purple: #8b5cf6;
   --color-nova-blue: #3b82f6;
   --color-nova-yellow: #facc15;
-  --color-nova-navy: #0d1117;
-  --color-nova-slate: #161b22;
+  --color-nova-navy: #070b14;
+  --color-nova-slate: #141a2a;
 
-  /* ── Brand tokens (TBD-008: exact palette pending brand guide) ──────── */
-  --color-brand-primary: var(--color-nova-purple);
-  --color-brand-secondary: var(--color-nova-blue);
+  --color-brand-primary: var(--color-senior-gold);
+  --color-brand-secondary: var(--color-senior-silver);
 
-  /* ── Surface tokens ──────────────────────────────────────────────── */
-  --color-surface-base: var(--color-nova-navy);
-  --color-surface-raised: var(--color-nova-slate);
+  --color-surface-base: var(--color-senior-navy);
+  --color-surface-raised: var(--color-senior-slate);
 
-  /* ── Text tokens ─────────────────────────────────────────────────── */
-  --color-text-primary: #f0f6fc;
-  --color-text-secondary: #8b949e;
-  --color-text-disabled: #484f58;
+  --color-text-primary: #f4f1ea;
+  --color-text-secondary: #9aa3b2;
+  --color-text-disabled: #5b6472;
 
-  /* ── Semantic tokens ─────────────────────────────────────────────── */
   --color-semantic-success: #3fb950;
   --color-semantic-warning: #d29922;
   --color-semantic-error: #f85149;
 
-  /* ── XP / progress accent (TBD-008) ─────────────────────────────── */
-  --color-xp-accent: var(--color-nova-yellow);
+  --color-xp-accent: var(--color-senior-gold);
 
-  /* Stitch: Midnight Orbital Mastery */
-  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
-  --color-surface: #10131b;
-  --color-bg-elevated: #0f1220;
-  --color-surface-card: #151827;
-  --color-surface-container-lowest: #0b0e15;
-  --color-surface-container-low: #181b23;
-  --color-surface-container: #1d2027;
-  --color-surface-container-high: #272a32;
-  --color-surface-bright: #363941;
-  --color-on-surface: #e0e2ed;
-  --color-on-surface-variant: #cbc3d7;
-  --color-outline: #958ea0;
-  --color-border-subtle: rgb(139 92 246 / 18%);
-  --color-primary: #d0bcff;
-  --color-on-primary: #3c0091;
-  --color-primary-container: #a078ff;
-  --color-on-primary-container: #340080;
-  --color-primary-fixed-dim: #d0bcff;
-  --color-secondary: #ddb7ff;
-  --color-secondary-container: #6f00be;
-  --color-tertiary: #c0c1ff;
-  --color-tertiary-container: #8083ff;
+  --color-surface: #080b16;
+  --color-bg-elevated: #0f1422;
+  --color-surface-card: #12182a;
+  --color-surface-container-lowest: #070b14;
+  --color-surface-container-low: #101628;
+  --color-surface-container: #171e32;
+  --color-surface-container-high: #1e263c;
+  --color-surface-bright: #2a3248;
+  --color-on-surface: #f4f1ea;
+  --color-on-surface-variant: #9aa3b2;
+  --color-outline: #6e7788;
+  --color-border-subtle: rgb(228 201 138 / 16%);
+  --color-primary: #e4c98a;
+  --color-on-primary: #1c1406;
+  --color-primary-container: #c9a24a;
+  --color-on-primary-container: #1c1406;
+  --color-primary-fixed-dim: #e4c98a;
+  --color-primary-fixed: #f3e2b0;
+  --color-surface-container-highest: #2a3248;
+  --color-on-background: #f4f1ea;
+  --color-cta-gold: #e8b84a;
+  --color-cta-gold-on: #1c1406;
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-desktop: 2rem;
+  --spacing-margin: 1.5rem;
+  --spacing-margin-desktop: 3rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+  --text-headline-xl: 2.5rem;
+  --text-headline-xl--line-height: 3rem;
+  --text-headline-xl--font-weight: 700;
+  --text-headline-lg: 2rem;
+  --text-headline-lg--line-height: 2.5rem;
+  --text-headline-lg--font-weight: 600;
+  --text-headline-md: 1.5rem;
+  --text-headline-md--line-height: 2rem;
+  --text-headline-md--font-weight: 600;
+  --text-headline-sm: 1.25rem;
+  --text-headline-sm--line-height: 1.75rem;
+  --text-headline-sm--font-weight: 600;
+  --text-body-lg: 1rem;
+  --text-body-lg--line-height: 1.5rem;
+  --text-body-md: 0.875rem;
+  --text-body-md--line-height: 1.25rem;
+  --text-label-lg: 0.875rem;
+  --text-label-lg--line-height: 1.25rem;
+  --text-label-lg--font-weight: 600;
+  --text-label-md: 0.75rem;
+  --text-label-md--line-height: 1rem;
+  --text-label-md--font-weight: 600;
+  --text-label-sm: 0.6875rem;
+  --text-label-sm--line-height: 0.875rem;
+  --text-label-sm--font-weight: 500;
+  --color-secondary: #9eb3c7;
+  --color-secondary-container: #1e2a3a;
+  --color-tertiary: #c9d0db;
+  --color-tertiary-container: #2a3248;
   --color-status-mastered: #10b981;
   --color-status-review: #f59e0b;
   --shadow-card: 0 8px 28px rgb(0 0 0 / 28%);
-  --shadow-primary: 0 0 24px rgb(160 120 255 / 25%);
+  --shadow-primary: 0 0 22px rgb(232 184 74 / 18%);
 
-  /* ── Mobile nav height ───────────────────────────────────────────── */
   --mobile-nav-height: 72px;
 }
 
-/* ── CSS custom properties on :root (runtime tokens) ──────────────────── */
 :root {
-  --background: oklch(0.18 0.04 265);       /* #0d1117 — Nova navy */
-  --foreground: #f0f6fc;
-  --foreground-muted: #8b949e;
-  --surface-raised: #161b22;                /* Nova slate */
+  --background: #070b14;
+  --foreground: #f4f1ea;
+  --foreground-muted: #9aa3b2;
+  --surface-raised: #141a2a;
   --nova-purple: #8b5cf6;
   --nova-blue: #3b82f6;
   --nova-yellow: #facc15;
-  --nova-navy: #0d1117;
-  --nova-slate: #161b22;
-  --surface-container: #1d2027;
+  --nova-navy: #070b14;
+  --nova-slate: #141a2a;
+  --surface-container: #171e32;
   --status-mastered: #10b981;
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
   --mobile-nav-height: 72px;
 }
 
-/* ── Base resets ─────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -95,14 +131,13 @@
 }
 
 html {
-  /* Prevent layout shift from scrollbar appearing */
   scrollbar-gutter: stable;
-  background: #10131b;
+  background: #070b14;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: #10131b;
+  background-color: #070b14;
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -110,24 +145,43 @@ body {
   margin: 0;
 }
 
-/* ── Heading typeface ────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
 
-/* ── Focus visible — never remove focus indicators ──────────────────── */
 :focus-visible {
-  outline: 2px solid #d0bcff;
+  outline: 2px solid #e8b84a;
   outline-offset: 2px;
 }
 
 ::selection {
-  background: #a078ff;
-  color: #340080;
+  background: rgb(232 184 74 / 35%);
+  color: #f4f1ea;
 }
 
 .cosmic-shell {
-  background-color: #070b1c;
+  background:
+    radial-gradient(1200px 640px at 12% -10%, rgb(232 184 74 / 6%), transparent 55%),
+    #070b14;
+}
+
+.senior-cta {
+  background: linear-gradient(180deg, #f0d27a 0%, #c9a24a 100%);
+  color: #1c1406;
+  box-shadow: 0 8px 22px rgb(0 0 0 / 28%), 0 0 18px rgb(232 184 74 / 16%);
+}
+
+.senior-cta:hover {
+  filter: brightness(1.05);
+}
+
+.senior-nav-link.active {
+  background: linear-gradient(90deg, rgb(232 184 74 / 16%), rgb(232 184 74 / 5%));
+  color: #f3e2b0;
+  font-weight: 600;
+  box-shadow:
+    inset 0 0 0 1px rgb(232 184 74 / 34%),
+    0 0 18px rgb(232 184 74 / 8%);
 }
 
 .subject-world-card {
@@ -159,5 +213,170 @@ h1, h2, h3, h4, h5, h6 {
   .subject-world-card--active:hover .subject-world-art {
     transition: none;
     transform: none;
+  }
+
+  .journey-astronaut,
+  .crew-card,
+  .crew-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Homepage astronaut — scene-integrated, not a sticker overlay */
+.journey-astronaut {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 12;
+  width: min(176px, 17vw);
+  pointer-events: none;
+  opacity: 0;
+  filter:
+    brightness(0.9)
+    saturate(0.86)
+    contrast(1.02)
+    drop-shadow(0 26px 18px rgb(4 8 16 / 52%))
+    drop-shadow(-10px -6px 16px rgb(232 184 74 / 16%));
+}
+
+.journey-astronaut img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 78%, rgb(0 0 0 / 35%) 92%, transparent 100%);
+}
+
+.journey-astronaut.is-armed {
+  will-change: transform, opacity, filter;
+}
+
+.astronaut-ground-shadow {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 2%;
+  height: 14%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgb(4 8 16 / 55%) 0%, transparent 72%);
+  filter: blur(6px);
+  transform: translateY(8px) scale(1);
+}
+
+.astronaut-rim-glow {
+  position: absolute;
+  inset: 8% 12% 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(232 184 74 / 22%) 0%, transparent 68%);
+  filter: blur(16px);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .journey-astronaut {
+    width: min(108px, 28vw);
+  }
+}
+
+.chapter-link.is-active {
+  color: var(--color-cta-gold);
+}
+
+.learning-tile {
+  isolation: isolate;
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+}
+
+.learning-tile-glow {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  inset: 12% 10%;
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(ellipse at 38% 42%, rgb(158 179 199 / 22%) 0%, transparent 68%),
+    radial-gradient(ellipse at 68% 62%, rgb(232 184 74 / 14%) 0%, transparent 64%);
+  filter: blur(32px);
+  opacity: 0.45;
+}
+
+.learning-tile-art {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  background: transparent;
+  -webkit-mask-image: radial-gradient(
+    ellipse 98% 96% at center,
+    #000 84%,
+    #000 92%,
+    rgb(0 0 0 / 0.94) 97%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 98% 96% at center,
+    #000 84%,
+    #000 92%,
+    rgb(0 0 0 / 0.94) 97%,
+    transparent 100%
+  );
+}
+
+.learning-tile-parallax {
+  height: 100%;
+  width: 100%;
+}
+
+.learning-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.045);
+  transform-origin: center;
+}
+
+.crew-card {
+  transition:
+    transform 420ms ease,
+    box-shadow 420ms ease,
+    border-color 420ms ease;
+}
+
+.crew-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: rgb(232 184 74 / 40%);
+  box-shadow:
+    0 12px 28px rgb(0 0 0 / 28%),
+    0 0 18px rgb(232 184 74 / 12%);
+}
+
+.crew-card .crew-bio {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 420ms ease,
+    opacity 420ms ease;
+}
+
+.crew-card:hover .crew-bio,
+.crew-card:focus-within .crew-bio {
+  max-height: 4.5rem;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crew-card .crew-bio,
+  .crew-card:hover .crew-bio,
+  .crew-card:focus-within .crew-bio {
+    max-height: 4.5rem;
+    opacity: 1;
+    transition: none;
   }
 }

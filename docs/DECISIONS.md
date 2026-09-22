@@ -28,11 +28,11 @@ Each entry follows this format:
 ## Confirmed Decisions
 
 ### ADR-001: AcadeMY Senior is a separate application from Junior
-- **Status:** Confirmed
+- **Status:** Confirmed (amended by ADR-017)
 - **Date:** 2026-09-16
 - **Context:** AcadeMY has an existing Form 1–3 application (Junior) in production. The Form 4–5 experience needs its own repository, deployment, and domain to allow independent development without risking the live Junior application.
-- **Decision:** AcadeMY Senior is a standalone application in its own repository (`academy-senior`). It is not a monorepo with Junior. It does not share a codebase, deployment pipeline, or database with Junior.
-- **Consequences:** Junior production must never be modified by Senior work. Any future shared infrastructure (e.g. shared identity) requires deliberate design and explicit approval before implementation.
+- **Decision:** AcadeMY Senior is a standalone application in its own repository (`academy-senior`). It is not a monorepo with Junior. It does not share a codebase or deployment pipeline with Junior. The original wording also said Senior does not share a database with Junior; **that database sentence is superseded by ADR-017**.
+- **Consequences:** Junior production source, hosting, and curriculum must never be modified by Senior work. Shared identity uses the existing AcadeMY Supabase project (see ADR-017), not a copied Junior repository.
 
 ### ADR-002: Supabase is the planned backend platform
 - **Status:** Confirmed
@@ -125,6 +125,27 @@ Each entry follows this format:
 - **Decision:** AcadeMY Senior uses a single hierarchy — Form → Subject → Chapter → Learning Tool → Activity — with stable kebab-case ids (`chemistry`, `chapter-02`, `quiz`, `set-a`). Canonical content languages are `bm` and `en`. Curriculum manifests hold metadata only; learning datasets load separately later. Notes is typed but postponed. Form 5 must reuse this architecture. Current TanStack routes `/f4/$lang/...` are preserved; `dlp` remains a legacy alias for `en`.
 - **Consequences:** New subjects and chapters follow `src/curriculum/` manifests and `docs/SENIOR_ARCHITECTURE.md`. Do not create per-subject page files. Do not put quiz/flashcard/mind-map datasets in manifests.
 
+### ADR-015: GSAP for the Senior marketing homepage only
+- **Status:** Confirmed
+- **Date:** 2026-09-21
+- **Context:** The public Senior homepage needs a cinematic scroll journey (astronaut choreography, layered parallax, chapter nav). The confirmed stack does not include an animation library. Three.js was considered for ambient particles and deferred to keep student devices usable.
+- **Decision:** Add `gsap` 3.15.0 with ScrollTrigger and MotionPathPlugin for `/` only. Load it via a dynamic import from the homepage hook so `/dashboard` and learning routes do not pay the bundle cost. Do not introduce Three.js, Framer Motion, or a custom scrollbar in this pass. Native scrolling remains intact. Animations use `gsap.context()` and revert on unmount.
+- **Consequences:** Homepage motion lives in `src/animation/`. Dashboard and AppShell must not import GSAP. A later Three.js ambient layer requires a new ADR.
+
+### ADR-017: Shared Supabase identity — same project, separate apps
+- **Status:** Confirmed
+- **Date:** 2026-09-22
+- **Context:** ADR-001 kept Senior in a separate repository so Junior production stays untouched. Students still need one AcadeMY account. Phase 2A audit found a single live project (`aojrbxoqbgyxmfljqpqj`, API `https://aojrbxoqbgyxmfljqpqj.supabase.co`) already holding `auth.users`, `profiles`, and `user_progress`. Creating a second Auth system or second Supabase project would split identity.
+- **Decision:** Junior/Main (`www.myacademy.my`, silken-sheen) and Senior (`senior.myacademy.my`, this repository) remain **separate codebases, separate deployments, and separate curriculum apps**. Both use the **same existing Supabase project** and the **same `auth.users` identity**. `www.myacademy.my` owns Login / Register / OAuth / email confirmation. Senior **consumes** that session (cookie Domain `.myacademy.my` in production) and does **not** ship its own Login or Register. Core user/profile identity (`auth.users`, `profiles`, school, form, language preference) is shared. Product-specific learning progress, Senior League XP, and Junior `get_leaderboard()` / monthly quiz XP / notes reading progress stay **scoped separately** until a later ADR (Phase 2B).
+- **Consequences:** Senior env vars point at the existing project (anon key only; no service role in the client). Do not create a second Supabase project. Do not copy the Junior repository. Do not wire Senior UI to Junior-scoped XP RPCs until Phase 2B. ADR-001’s “no shared database” sentence is superseded; separate apps and deployments are not.
+
+### ADR-016: Senior cinematic chrome — midnight navy and portal gold
+- **Status:** Confirmed
+- **Date:** 2026-09-21
+- **Context:** ADR-008 and the design-system steering doc treat Junior’s purple-led dashboard chrome as the Senior reference. The cinematic Senior homepage uses a different visual world (deep space navy, warm portal gold, champagne highlights). Keeping the logged-in shell in Junior purple made Home, Dashboard, and Leaderboard feel like two products.
+- **Decision:** The logged-in Senior shell (sidebar, top bar, primary CTAs, active tabs, and in-app surfaces) uses the cinematic Senior palette: midnight navy / charcoal, warm portal gold as the primary accent, muted silver-blue as a supporting accent, and soft white text. Layout, routes, and dashboard/leaderboard behaviour are unchanged. Purple remains a reserved family-brand token (`nova-purple`) but is no longer used for Senior chrome.
+- **Consequences:** This is an explicit, approved deviation from ADR-008’s colour language for Senior chrome only. Do not reintroduce bright purple/fuchsia navigation pills or CTA gradients. TBD-008 (family-wide brand hex) remains open for marketing collateral; Senior product chrome follows this ADR.
+
 ---
 
 ## TBD Decisions
@@ -134,16 +155,12 @@ Each entry follows this format:
 - Resolved: TanStack Start + React + TypeScript + Vite confirmed.
 
 ### TBD-002: Shared vs. separate Supabase project for Junior and Senior
-- **Status:** TBD
-- **Context:** A shared student identity requires some shared data layer. Whether this means a single Supabase project with schema separation or two projects with a bridge service is unresolved.
-- **Blocking:** Database provisioning, shared identity implementation
-- **To decide:** Supabase project topology for Senior and the eventual shared identity layer
+- **Status:** ~~TBD~~ **RESOLVED — see ADR-017**
+- Resolved: Same existing Supabase project. Separate repositories and deployments. No second project.
 
 ### TBD-003: Shared identity architecture
-- **Status:** TBD
-- **Context:** Students should ultimately have one AcadeMY identity across Junior and Senior. The mechanism (shared Supabase auth, dedicated auth service, federated identity, etc.) has not been designed.
-- **Blocking:** Cross-platform login, shared profile, cross-platform progress
-- **To decide:** Technical design for the shared identity system
+- **Status:** ~~TBD~~ **RESOLVED — see ADR-017**
+- Resolved: Shared `auth.users` + `profiles`. www owns Login/Register. Senior consumes the session. Product-specific progress/XP remain separately scoped (Phase 2B).
 
 ### TBD-004: Hosting and deployment platform for Senior
 - **Status:** TBD

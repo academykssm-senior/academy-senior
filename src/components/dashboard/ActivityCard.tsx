@@ -58,10 +58,10 @@ export function ActivityCard({
     <Link
       to={ACTIVITY_TO[activity]}
       params={{ lang, subject, chapter }}
-      className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nova-purple"
+      className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta-gold"
     >
-      <Card className="border border-nova-purple/30 transition hover:border-nova-purple">
-        <p className="font-display text-lg font-semibold text-nova-purple">
+      <Card className="border border-cta-gold/25 transition hover:border-cta-gold">
+        <p className="font-display text-lg font-semibold text-cta-gold">
           {title}
         </p>
         <p className="mt-1 text-sm text-text-secondary">{description}</p>

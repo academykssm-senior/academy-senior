@@ -5,8 +5,8 @@ import { dashboardSubjects } from "@/content/mock/dashboard";
 import type { LanguageStream, SubjectView } from "@/types/curriculum";
 
 const accentClasses = {
-  purple: "bg-primary/10 text-primary",
-  indigo: "bg-tertiary-container/20 text-tertiary",
+  gold: "bg-cta-gold/12 text-cta-gold",
+  indigo: "bg-senior-silver/15 text-senior-silver",
   emerald: "bg-status-mastered/15 text-status-mastered",
 } as const;
 

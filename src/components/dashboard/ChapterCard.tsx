@@ -18,9 +18,9 @@ export function ChapterCard({ chapter, lang }: ChapterCardProps) {
         subject: chapter.subjectSlug,
         chapter: chapter.slug,
       }}
-      className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nova-purple"
+      className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta-gold"
     >
-      <Card className="transition hover:ring-1 hover:ring-nova-purple/60">
+      <Card className="transition hover:ring-1 hover:ring-cta-gold/50">
         <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
           {chapterLabel} {chapter.number}
         </p>

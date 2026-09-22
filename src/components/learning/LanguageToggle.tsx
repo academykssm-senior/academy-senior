@@ -20,8 +20,8 @@ export function LanguageToggle({ lang, languages, params, to }: LanguageTogglePr
       {languages.map((language) => {
         const selected = language === current;
         const className = selected
-          ? "rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white"
-          : "rounded-full bg-white/5 px-3 py-1.5 text-xs font-medium text-white/70 hover:text-white";
+          ? "rounded-full border border-cta-gold/30 bg-cta-gold/12 px-3 py-1.5 text-xs font-semibold text-cta-gold"
+          : "rounded-full border border-white/8 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/70 hover:text-white";
 
         if (to === "/f4/$lang/$subject") {
           return (

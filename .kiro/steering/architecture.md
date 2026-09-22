@@ -37,8 +37,10 @@ AcadeMY Junior is a separate, live production application in its own repository.
 - Modify Junior source code
 - Deploy to Junior's infrastructure
 - Alter Junior's database schema or data
-- Share environment variables or secrets with Junior
+- Copy Junior’s hosting secret store or `.env` files
 - Import or depend on Junior's codebase as a package (hard dependency)
+
+Senior may be configured independently with the **same Supabase project URL and anon key** as Main/Junior (ADR-017). That is shared identity, not a copied Junior environment.
 
 ### Component Reuse from Junior — Deliberate and Selective
 
@@ -58,23 +60,22 @@ Everything in this repository is scoped exclusively to the Form 4–5 experience
 
 ---
 
-## Shared Identity Goal
+## Shared Identity (ADR-017)
 
-Students should eventually use **one AcadeMY identity** across both Junior and Senior — a single login, single profile, and single progress record that spans their secondary school years.
+Students use **one AcadeMY identity** across Main/Junior and Senior.
 
-### Current State
+| Concern | Decision |
+|---|---|
+| Repositories | Separate |
+| Deployments / domains | Separate (`www.myacademy.my` vs `senior.myacademy.my`) |
+| Curriculum / app UX | Separate |
+| Supabase project | Shared — existing AcadeMY project |
+| `auth.users` | Shared |
+| Core profile (`profiles`, school, form, language) | Shared |
+| Login / Register UI | www only |
+| Learning progress, Senior League XP | Product-scoped (not mixed with Junior XP in Phase 2A) |
 
-The shared identity layer does not exist yet. Supabase is used for authentication in the existing platform, but a unified cross-application identity system has not been designed or implemented.
-
-### Approach (Planned — TBD)
-
-Shared identity will be designed deliberately. Options under consideration include:
-
-- A shared Supabase project with RLS-separated schemas per application
-- A dedicated identity/auth service that both Junior and Senior delegate to
-- Supabase Auth as the identity layer, with per-application databases for learning data
-
-**No shared identity implementation will begin until the architecture is explicitly agreed and reviewed.**
+www owns authentication. Senior reads the session (production cookie Domain `.myacademy.my`) and never presents a second account system.
 
 ---
 

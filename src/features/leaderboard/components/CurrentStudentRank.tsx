@@ -13,9 +13,9 @@ export function CurrentStudentRank({ standing, period }: CurrentStudentRankProps
   return (
     <section
       aria-label="Your position"
-      className="rounded-2xl border border-primary/20 bg-primary/8 px-4 py-4 sm:px-5"
+      className="rounded-2xl border border-cta-gold/20 bg-cta-gold/8 px-4 py-4 sm:px-5"
     >
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-cta-gold">
         Your position
       </p>
       {standing ? (
@@ -23,13 +23,13 @@ export function CurrentStudentRank({ standing, period }: CurrentStudentRankProps
           <StudentAvatar name={standing.displayName} size="md" />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <p className="font-display text-2xl font-bold tabular-nums text-cyan-300">
+              <p className="font-display text-2xl font-bold tabular-nums text-cta-gold">
                 {formatRank(standing.rank)}
               </p>
               <p className="truncate text-base font-semibold text-white">{standing.displayName}</p>
             </div>
             <p className="mt-1 text-sm text-on-surface-variant">
-              <span className="font-semibold text-cyan-200">{formatXp(standing.xp)}</span>
+              <span className="font-semibold text-cta-gold">{formatXp(standing.xp)}</span>
               {` ${periodLabel}`}
             </p>
             {standing.nextRank !== null && standing.xpToNextRank !== null ? (

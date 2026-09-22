@@ -1,3 +1,6 @@
+/**
+ * Isolated mock lifetime XP tile. Not Junior user_progress.xp (Phase 2B).
+ */
 import { Icon } from "@/components/ui/Icon";
 import { mockStudent } from "@/content/mock/student";
 
@@ -9,7 +12,7 @@ const stats = [
 
 export function TodayProgress() {
   return (
-    <section className="rounded-[28px] border border-white/10 bg-[#151a3a]/80 p-5 shadow-card">
+    <section className="rounded-[28px] border border-white/10 bg-[#12182a]/90 p-5 shadow-card">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-bold">Today&apos;s Progress</h2>
         <span className="text-xs text-on-surface-variant">View reports</span>

@@ -11,7 +11,7 @@ export function SubjectCard({ subject, lang }: SubjectCardProps) {
   const comingSoon = lang === "bm" ? "Akan datang" : "Coming soon";
 
   const body = (
-    <Card className={subject.hasChapters ? "transition hover:ring-1 hover:ring-nova-purple/60" : "opacity-80"}>
+    <Card className={subject.hasChapters ? "transition hover:ring-1 hover:ring-cta-gold/50" : "opacity-80"}>
       <p className="font-display text-lg font-semibold">{subject.name}</p>
       <p className="mt-1 text-sm text-text-secondary">{subject.description}</p>
       {!subject.hasChapters ? (
@@ -28,7 +28,7 @@ export function SubjectCard({ subject, lang }: SubjectCardProps) {
     <Link
       to="/f4/$lang/$subject"
       params={{ lang, subject: subject.slug }}
-      className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nova-purple"
+      className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta-gold"
     >
       {body}
     </Link>

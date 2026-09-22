@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
 const TONES = [
-  "bg-violet-500/25 text-violet-100",
-  "bg-cyan-500/20 text-cyan-100",
-  "bg-indigo-500/25 text-indigo-100",
-  "bg-fuchsia-500/20 text-fuchsia-100",
-  "bg-sky-500/20 text-sky-100",
-  "bg-teal-500/20 text-teal-100",
+  "bg-cta-gold/18 text-cta-gold",
+  "bg-senior-silver/20 text-senior-silver",
+  "bg-amber-500/18 text-amber-100",
+  "bg-slate-500/25 text-slate-100",
+  "bg-sky-500/15 text-sky-100",
+  "bg-teal-500/18 text-teal-100",
 ] as const;
 
 type StudentAvatarProps = {

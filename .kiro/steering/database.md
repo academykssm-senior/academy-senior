@@ -6,9 +6,9 @@ inclusion: always
 
 ## Current State
 
-**No database connection exists for AcadeMY Senior yet.**
+Senior uses the **existing AcadeMY Supabase project** for authentication and core profile reads (ADR-017). It does not have its own Auth users table.
 
-Do not connect to any Supabase project, run migrations, or alter any schema until explicitly instructed. This document describes the intended direction only.
+Do not create a second Supabase project. Do not run schema migrations or alter shared tables unless explicitly instructed. Senior League XP and curriculum progress remain unwired until Phase 2B.
 
 ---
 
@@ -22,11 +22,7 @@ Supabase is the current backend platform for the AcadeMY platform (used by Junio
 - Storage (for assets, if needed)
 - Realtime (for live features, if needed — TBD)
 
-**Which Supabase project Senior will connect to is TBD.** Options include:
-- A new, dedicated Supabase project for Senior
-- A shared Supabase project with Junior (if shared identity is designed this way)
-
-This decision must be made deliberately and documented in `docs/DECISIONS.md` before any connection is established.
+**Project:** the existing AcadeMY project (see ADR-017). Auth identity and `profiles` are shared. Product-specific Senior learning tables, if added later, must be versioned migrations with RLS — never a second Auth project.
 
 ---
 

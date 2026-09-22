@@ -54,7 +54,7 @@ export function LearningToolCard({
   );
 
   const className =
-    "flex h-full min-h-40 flex-col rounded-2xl border border-white/8 bg-surface-card p-4 text-left transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nova-purple";
+    "flex h-full min-h-40 flex-col rounded-2xl border border-white/8 bg-surface-card p-4 text-left transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta-gold";
 
   if (!available) {
     return (

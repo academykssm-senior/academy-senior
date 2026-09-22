@@ -24,7 +24,7 @@ export function StudyChatPanel({ displayName, userId, className }: StudyChatPane
     >
       <header className="shrink-0 border-b border-white/8 px-4 py-3">
         <div className="flex items-center gap-2">
-          <Icon className="text-lg text-primary" name="forum" />
+          <Icon className="text-lg text-cta-gold" name="forum" />
           <h2 className="font-display text-base font-semibold text-white">Study Chat</h2>
         </div>
         <p className="mt-0.5 text-xs text-on-surface-variant">Learn together.</p>

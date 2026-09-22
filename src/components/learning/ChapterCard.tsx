@@ -24,7 +24,7 @@ export function ChapterCard({
 }: ChapterCardProps) {
   return (
     <Link
-      className="flex min-h-16 items-center gap-3 rounded-2xl border border-white/8 bg-surface-card px-4 py-3.5 transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nova-purple"
+      className="flex min-h-16 items-center gap-3 rounded-2xl border border-white/8 bg-surface-card px-4 py-3.5 transition hover:border-white/16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta-gold"
       params={{
         lang,
         subject: chapter.subjectSlug,

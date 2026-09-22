@@ -40,7 +40,7 @@ export function StudyChatInput({ disabled = false, onSend }: StudyChatInputProps
       <div className="flex items-end gap-2">
         <textarea
           aria-describedby="study-chat-help"
-          className="min-h-11 max-h-28 flex-1 resize-none rounded-xl border-0 bg-white/6 px-3 py-2.5 text-sm text-white outline-none placeholder:text-outline focus:ring-1 focus:ring-primary"
+          className="min-h-11 max-h-28 flex-1 resize-none rounded-xl border-0 bg-white/6 px-3 py-2.5 text-sm text-white outline-none placeholder:text-outline focus:ring-1 focus:ring-cta-gold/40"
           disabled={disabled || pending}
           id="study-chat-input"
           maxLength={STUDY_CHAT_MAX_LENGTH}
@@ -57,7 +57,7 @@ export function StudyChatInput({ disabled = false, onSend }: StudyChatInputProps
         />
         <button
           aria-label="Send message"
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary-container text-on-primary-container disabled:opacity-40"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-cta-gold text-cta-gold-on disabled:opacity-40"
           disabled={disabled || pending || value.trim().length === 0}
           type="submit"
         >

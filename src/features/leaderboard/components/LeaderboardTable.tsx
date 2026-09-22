@@ -29,7 +29,7 @@ export function LeaderboardRow({ entry, isCurrentStudent, variant }: Leaderboard
       <li
         className={cn(
           "flex items-center gap-3 border-t border-white/8 px-3 py-3 first:border-t-0",
-          isCurrentStudent && "bg-primary/10",
+          isCurrentStudent && "bg-cta-gold/8",
         )}
       >
         <span className="w-8 shrink-0 font-display text-sm font-semibold tabular-nums text-on-surface-variant">
@@ -40,12 +40,12 @@ export function LeaderboardRow({ entry, isCurrentStudent, variant }: Leaderboard
           <p className="truncate text-sm font-medium text-white">
             {entry.displayName}
             {isCurrentStudent ? (
-              <span className="ml-2 text-[10px] font-semibold uppercase tracking-wider text-primary">
+              <span className="ml-2 text-[10px] font-semibold uppercase tracking-wider text-cta-gold">
                 You
               </span>
             ) : null}
           </p>
-          <p className="text-xs font-semibold tabular-nums text-cyan-200">{formatXp(entry.xp)}</p>
+          <p className="text-xs font-semibold tabular-nums text-cta-gold">{formatXp(entry.xp)}</p>
         </div>
         <span className={cn("shrink-0 text-sm font-semibold tabular-nums", changeClass)}>
           {change.label}
@@ -55,7 +55,7 @@ export function LeaderboardRow({ entry, isCurrentStudent, variant }: Leaderboard
   }
 
   return (
-    <tr className={cn(isCurrentStudent && "bg-primary/10")}>
+    <tr className={cn(isCurrentStudent && "bg-cta-gold/8")}>
       <th
         className="border-t border-white/8 px-4 py-3.5 text-left font-display text-sm font-semibold tabular-nums text-on-surface-variant"
         scope="row"
@@ -68,14 +68,14 @@ export function LeaderboardRow({ entry, isCurrentStudent, variant }: Leaderboard
           <span className="font-medium text-white">
             {entry.displayName}
             {isCurrentStudent ? (
-              <span className="ml-2 text-[10px] font-semibold uppercase tracking-wider text-primary">
+              <span className="ml-2 text-[10px] font-semibold uppercase tracking-wider text-cta-gold">
                 You
               </span>
             ) : null}
           </span>
         </div>
       </td>
-      <td className="border-t border-white/8 px-4 py-3.5 text-sm font-semibold tabular-nums text-cyan-200">
+      <td className="border-t border-white/8 px-4 py-3.5 text-sm font-semibold tabular-nums text-cta-gold">
         {formatXp(entry.xp)}
       </td>
       <td className={cn("border-t border-white/8 px-4 py-3.5 text-sm font-semibold tabular-nums", changeClass)}>

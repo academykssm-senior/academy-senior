@@ -32,7 +32,7 @@ export function LeaderboardPeriodSelector({
             className={cn(
               "min-h-9 rounded-lg px-3 text-xs font-semibold transition",
               selected
-                ? "bg-primary-container/25 text-white"
+                ? "bg-cta-gold/15 text-cta-gold"
                 : "text-on-surface-variant hover:text-white",
             )}
             key={period}
@@ -94,7 +94,7 @@ export function LeaderboardEmptyState({ lang }: { lang: ContentLanguage }) {
         Complete learning activities to start earning XP.
       </p>
       <Link
-        className="mt-5 inline-flex min-h-11 items-center rounded-full bg-primary-container px-5 text-sm font-semibold text-on-primary-container"
+        className="mt-5 inline-flex min-h-11 items-center rounded-full bg-cta-gold px-5 text-sm font-semibold text-cta-gold-on"
         params={{ lang }}
         to="/f4/$lang"
       >

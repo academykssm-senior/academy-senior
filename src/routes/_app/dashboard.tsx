@@ -7,19 +7,19 @@ import { RankCard } from "@/components/dashboard/RankCard";
 import { SubjectWorlds } from "@/components/dashboard/SubjectWorlds";
 import { TodayProgress } from "@/components/dashboard/TodayProgress";
 import { listSubjects } from "@/content/catalogue";
-import { mockStudent } from "@/content/mock/student";
 
 export const Route = createFileRoute("/_app/dashboard")({
   component: DashboardPage,
 });
 
 function DashboardPage() {
-  const lang = mockStudent.languagePreference;
+  const { student } = Route.useRouteContext();
+  const lang = student.languagePreference;
   const subjects = listSubjects(4, lang);
 
   return (
     <div className="relative pb-4">
-      <DashboardHero lang={lang} />
+      <DashboardHero displayName={student.displayName} lang={lang} />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
         <div className="lg:col-span-5">

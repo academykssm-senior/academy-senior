@@ -25,7 +25,7 @@ function Form4SubjectsPage() {
       />
       <div aria-label="Language" className="mb-4 flex gap-2" role="group">
         <Link
-          className="rounded-full bg-surface-raised px-3 py-1.5 text-sm text-nova-purple"
+          className="rounded-full bg-surface-raised px-3 py-1.5 text-sm text-cta-gold"
           params={{ lang: otherLang }}
           to="/f4/$lang"
         >
