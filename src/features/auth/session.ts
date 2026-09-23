@@ -1,20 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { redirect } from "@tanstack/react-router";
-import { getRequestUrl } from "@tanstack/react-start/server";
-import { getMainHomeUrl, getMainLoginUrl } from "@/lib/appUrls";
-import { sanitizeReturnTo } from "@/lib/returnTo";
-import { createSupabaseServerClient } from "@/lib/supabase.server";
-import { mapAuthenticatedStudent, type AuthenticatedStudent } from "@/lib/studentIdentity";
-
-type ProfileQueryRow = {
-  id: string;
-  full_name: string | null;
-  username: string | null;
-  email: string | null;
-  form: string | null;
-  school: string | null;
-  schools: { school_name: string } | { school_name: string }[] | null;
-};
+import { sanitizeNextPath } from "@/lib/returnTo";
+import type { AuthenticatedStudent } from "@/lib/studentIdentity";
 
 type GuardInput = {
   pathname: string;
@@ -38,52 +25,19 @@ export const requireAuthenticatedStudent = createServerFn({ method: "GET" })
     };
   })
   .handler(async ({ data }): Promise<AuthenticatedStudent> => {
+    const { loadAuthenticatedStudent } = await import("@/features/auth/session.server");
     const student = await loadAuthenticatedStudent();
     if (student) return student;
 
-    const origin = getRequestUrl().origin;
-    const next = sanitizeReturnTo(`${origin}${data.pathname}${data.search}`, origin);
+    const next = sanitizeNextPath(`${data.pathname}${data.search}`);
     throw redirect({
-      href: `${getMainLoginUrl()}?next=${encodeURIComponent(next)}`,
+      to: "/login",
+      search: { next },
     });
   });
 
 export const signOutStudent = createServerFn({ method: "POST" }).handler(async () => {
-  const supabase = createSupabaseServerClient();
-  if (supabase) {
-    await supabase.auth.signOut();
-  }
-  throw redirect({ href: getMainHomeUrl() });
+  const { signOutSeniorSession } = await import("@/features/auth/session.server");
+  await signOutSeniorSession();
+  throw redirect({ to: "/" });
 });
-
-async function loadAuthenticatedStudent(): Promise<AuthenticatedStudent | null> {
-  const supabase = createSupabaseServerClient();
-  if (!supabase) return null;
-
-  const { data: claimsData } = await supabase.auth.getClaims();
-    const claims = claimsData?.claims;
-    if (!claims) return null;
-    const userId = claims.sub;
-    if (typeof userId !== "string" || userId.length === 0) return null;
-
-    const authEmail = typeof claims.email === "string" ? claims.email : null;
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("id, full_name, username, email, form, school, school_id, schools:school_id ( school_name )")
-    .eq("id", userId)
-    .maybeSingle();
-
-  const { data: progress } = await supabase
-    .from("user_progress")
-    .select("language_preference")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  return mapAuthenticatedStudent(
-    userId,
-    authEmail,
-    (profile as ProfileQueryRow | null) ?? null,
-    progress,
-  );
-}

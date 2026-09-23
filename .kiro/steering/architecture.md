@@ -60,22 +60,22 @@ Everything in this repository is scoped exclusively to the Form 4–5 experience
 
 ---
 
-## Shared Identity (ADR-017)
+## Shared Identity (ADR-017 / ADR-018)
 
-Students use **one AcadeMY identity** across Main/Junior and Senior.
+Students may use the **same AcadeMY account** (`auth.users`) on Junior and Senior. They do **not** share a browser session.
 
 | Concern | Decision |
 |---|---|
 | Repositories | Separate |
 | Deployments / domains | Separate (`www.myacademy.my` vs `senior.myacademy.my`) |
 | Curriculum / app UX | Separate |
-| Supabase project | Shared — existing AcadeMY project |
-| `auth.users` | Shared |
-| Core profile (`profiles`, school, form, language) | Shared |
-| Login / Register UI | www only |
-| Learning progress, Senior League XP | Product-scoped (not mixed with Junior XP in Phase 2A) |
+| Supabase project | Shared — existing AcadeMY project `aojrbxoqbgyxmfljqpqj` |
+| `auth.users` / `profiles` / schools | Shared where compatible |
+| Login / Register UI | **Each app owns its own** |
+| Auth cookies | **Host-only** — never `Domain=.myacademy.my` |
+| Learning progress, Senior League XP | Product-scoped |
 
-www owns authentication. Senior reads the session (production cookie Domain `.myacademy.my`) and never presents a second account system.
+Senior unauthenticated users go to Senior `/login`, not www.
 
 ---
 

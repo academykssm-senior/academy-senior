@@ -78,13 +78,15 @@ function HomeNav() {
         <div className="flex items-center gap-2">
           <Link
             className="hidden rounded-full border border-white/15 px-4 py-2 text-label-md text-on-surface transition-colors hover:border-cta-gold/50 sm:inline-flex"
-            to="/home"
+            search={{ next: "/home" }}
+            to="/login"
           >
             Login
           </Link>
           <Link
             className="senior-cta inline-flex rounded-full px-4 py-2 text-label-md"
-            to="/home"
+            search={{ next: "/home" }}
+            to="/register"
           >
             Get Started
           </Link>
@@ -190,13 +192,15 @@ function HeroSection({
                 <>
                   <Link
                     className="senior-cta inline-flex rounded-full px-6 py-3 text-label-lg"
-                    to="/home"
+                    search={{ next: "/home" }}
+                    to="/register"
                   >
                     Get Started
                   </Link>
                   <Link
                     className="inline-flex rounded-full border border-white/20 px-6 py-3 text-label-lg text-on-surface transition-colors hover:border-cta-gold/50"
-                    to="/home"
+                    search={{ next: "/home" }}
+                    to="/login"
                   >
                     Login
                   </Link>
