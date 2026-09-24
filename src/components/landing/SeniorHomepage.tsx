@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useRef } from "react";
 import { useAcademyJourney } from "@/animation/useAcademyJourney";
+import { AcademyEntrance } from "@/components/cinematic/AcademyEntrance";
 import { JourneyAstronaut } from "@/components/landing/JourneyAstronaut";
 import {
   ACTIVITY_CARDS,
@@ -24,7 +25,8 @@ export function SeniorHomepage({
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const astronautRef = useRef<HTMLDivElement>(null);
-  useAcademyJourney(rootRef, astronautRef);
+  const isPublic = variant === "public";
+  useAcademyJourney(rootRef, isPublic ? undefined : astronautRef);
 
   return (
     <div ref={rootRef} className="relative overflow-x-clip bg-surface text-on-surface" data-journey-root="">
@@ -34,9 +36,12 @@ export function SeniorHomepage({
       >
         Skip to content
       </a>
-      {variant === "public" ? <HomeNav /> : null}
-      <JourneyAstronaut astronautRef={astronautRef} />
-      <HeroSection languagePreference={languagePreference} variant={variant} />
+      {isPublic ? null : <JourneyAstronaut astronautRef={astronautRef} />}
+      {isPublic ? (
+        <AcademyEntrance languagePreference={languagePreference} />
+      ) : (
+        <HeroSection languagePreference={languagePreference} variant={variant} />
+      )}
       <LearningSection languagePreference={languagePreference} />
       <ActivitiesSection />
       <CommitteeSection />
@@ -176,14 +181,14 @@ function HeroSection({
 
       <div className="relative z-20 mx-auto flex min-h-dvh max-w-7xl flex-col justify-center px-4 pb-16 pt-28 md:px-8 md:pt-24">
         <div className="grid items-end gap-10 lg:grid-cols-12">
-          <div className="max-w-xl lg:col-span-6">
+          <div className={variant === "public" ? "max-w-2xl lg:col-span-7" : "max-w-xl lg:col-span-6"}>
             <p className="text-label-md uppercase tracking-[0.28em] text-on-surface-variant">
               Welcome to
             </p>
             <h1 className="mt-2 text-4xl font-bold tracking-tight text-on-surface sm:text-5xl lg:text-6xl">
               AcadeMY <span className="text-cta-gold">SENIOR</span>
             </h1>
-            <p className="mt-5 max-w-md text-body-lg text-on-surface-variant">
+            <p className={variant === "public" ? "mt-5 max-w-xl text-body-lg text-on-surface-variant" : "mt-5 max-w-md text-body-lg text-on-surface-variant"}>
               Your journey begins at the classroom&apos;s edge, but it never stays there.
               AcadeMY Senior is the next chapter of learning, leadership, and community.
             </p>

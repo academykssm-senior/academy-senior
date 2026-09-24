@@ -90,6 +90,13 @@ export const COUNCIL_STATS = [
   { value: "100%", label: "Student-led" },
 ] as const;
 
+export const CINEMATIC = {
+  gate: "/cinematic/academy-entry-poster.webp",
+  entry: "/cinematic/academy-entry.webm",
+  entryMp4: "/cinematic/academy-entry.mp4",
+  lobby: "/cinematic/academy-senior-lobby.webp",
+} as const;
+
 export const ASSETS = {
   astronaut: "/assets/senior/astronaut.webp",
   astronautFallback: "/assets/senior/astronaut.png",

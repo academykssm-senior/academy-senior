@@ -380,3 +380,43 @@ h1, h2, h3, h4, h5, h6 {
     transition: none;
   }
 }
+
+@keyframes academy-gate-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.02); }
+}
+
+@keyframes academy-lobby-push {
+  from { transform: scale(1); }
+  to { transform: scale(1.025); }
+}
+
+.academy-gate-drift {
+  animation: academy-gate-drift 32s ease-out forwards;
+}
+
+.academy-lobby-push {
+  animation: academy-lobby-push 42s linear forwards;
+}
+
+.academy-media {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 767px) {
+  .academy-gate-drift {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .academy-gate-drift,
+  .academy-lobby-push {
+    animation: none;
+  }
+}

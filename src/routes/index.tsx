@@ -13,16 +13,7 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [
-      {
-        rel: "preload",
-        href: "/assets/senior/hero-portal.webp",
-        as: "image",
-      },
-      {
-        rel: "preload",
-        href: "/assets/senior/astronaut.webp",
-        as: "image",
-      },
+      { rel: "preload", href: "/cinematic/academy-entry-poster.webp", as: "image" },
     ],
   }),
 });
