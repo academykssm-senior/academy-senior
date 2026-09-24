@@ -14,7 +14,7 @@ import {
 
 export type AcademyJourneyRefs = {
   root: HTMLElement;
-  astronaut: HTMLElement;
+  astronaut: HTMLElement | null;
 };
 
 type MediaConditions = {
@@ -186,15 +186,28 @@ function setupAstronautJourney(
     );
   }
 
+  setupPortalGlow(root, hero, true);
+}
+
+function setupPortalGlow(root: HTMLElement, hero: HTMLElement, synced: boolean): void {
   const glow = q(root, "[data-journey-portal-glow]");
-  if (glow) {
-    tl.fromTo(
-      glow,
-      { opacity: 0.22 },
-      { opacity: 0.62, duration: 0.75, ease: "none" },
-      0,
-    );
-  }
+  if (!glow) return;
+
+  gsap.fromTo(
+    glow,
+    { opacity: 0.22 },
+    {
+      opacity: 0.62,
+      duration: synced ? 0.75 : 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: hero,
+        start: "top top",
+        end: "bottom top",
+        scrub: JOURNEY_SCRUB,
+      },
+    },
+  );
 }
 
 function setupParallax(root: HTMLElement, breakpoint: JourneyBreakpoint): void {
@@ -351,12 +364,14 @@ function setupIdle(root: HTMLElement): void {
   }
 }
 
-function setupReducedMotion(root: HTMLElement, astronaut: HTMLElement): void {
-  const start = poseFor(root, "heroRest", detectBreakpoint(window.innerWidth));
-  gsap.set(astronaut, {
-    ...poseVars(start),
-    transformOrigin: "50% 82%",
-  });
+function setupReducedMotion(root: HTMLElement, astronaut: HTMLElement | null): void {
+  if (astronaut) {
+    const start = poseFor(root, "heroRest", detectBreakpoint(window.innerWidth));
+    gsap.set(astronaut, {
+      ...poseVars(start),
+      transformOrigin: "50% 82%",
+    });
+  }
 
   qAll(root, "[data-reveal], [data-finale-headline]").forEach((el) => {
     gsap.set(el, { clearProps: "transform", opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 });
@@ -395,7 +410,12 @@ export function initAcademyJourney(refs: AcademyJourneyRefs): () => void {
         }
 
         const breakpoint = breakpointFromConditions(conditions);
-        setupAstronautJourney(root, astronaut, breakpoint);
+        if (astronaut) {
+          setupAstronautJourney(root, astronaut, breakpoint);
+        } else {
+          const hero = q(root, '[data-journey-section="home"]');
+          if (hero) setupPortalGlow(root, hero, false);
+        }
         setupParallax(root, breakpoint);
         setupReveals(root, breakpoint);
         setupIdle(root);
@@ -405,6 +425,7 @@ export function initAcademyJourney(refs: AcademyJourneyRefs): () => void {
 
     const images = Array.from(root.querySelectorAll<HTMLImageElement>("img"));
     let pending = images.filter((img) => !img.complete).length;
+    const detachImages: Array<() => void> = [];
     const refreshOnce = () => {
       ScrollTrigger.refresh();
     };
@@ -419,6 +440,10 @@ export function initAcademyJourney(refs: AcademyJourneyRefs): () => void {
         if (img.complete) continue;
         img.addEventListener("load", onDone, { once: true });
         img.addEventListener("error", onDone, { once: true });
+        detachImages.push(() => {
+          img.removeEventListener("load", onDone);
+          img.removeEventListener("error", onDone);
+        });
       }
     }
 
@@ -434,11 +459,12 @@ export function initAcademyJourney(refs: AcademyJourneyRefs): () => void {
     return () => {
       window.clearTimeout(resizeTimer);
       window.removeEventListener("resize", onResize);
+      for (const detach of detachImages) detach();
     };
   }, root);
 
   return () => {
-    astronaut.classList.remove("is-armed");
+    astronaut?.classList.remove("is-armed");
     for (const cleanup of navCleanups) cleanup();
     ctx.revert();
   };
