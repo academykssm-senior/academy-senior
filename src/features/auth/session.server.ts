@@ -1,5 +1,9 @@
 import { createSupabaseServerClient } from "@/lib/supabase.server";
-import { mapAuthenticatedStudent, type AuthenticatedStudent } from "@/lib/studentIdentity";
+import {
+  authenticatedUserIdFromClaims,
+  mapAuthenticatedStudent,
+  type AuthenticatedStudent,
+} from "@/lib/studentIdentity";
 
 type ProfileQueryRow = {
   id: string;
@@ -18,8 +22,8 @@ export async function loadAuthenticatedStudent(): Promise<AuthenticatedStudent |
   const { data: claimsData } = await supabase.auth.getClaims();
   const claims = claimsData?.claims;
   if (!claims) return null;
-  const userId = claims.sub;
-  if (typeof userId !== "string" || userId.length === 0) return null;
+  const userId = authenticatedUserIdFromClaims(claims);
+  if (!userId) return null;
 
   const authEmail = typeof claims.email === "string" ? claims.email : null;
 

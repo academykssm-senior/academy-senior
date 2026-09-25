@@ -1,5 +1,8 @@
-import { sanitizeNextPath } from "@/lib/returnTo";
-import { getSupabaseAuthCookieOptions } from "@/lib/supabase-auth-cookie";
+import { sanitizeNextPath } from "./returnTo.ts";
+import {
+  SUPABASE_AUTH_COOKIE_NAME,
+  getSupabaseAuthCookieOptions,
+} from "./supabase-auth-cookie.ts";
 
 const cases: Array<[string | null | undefined, string]> = [
   [null, "/home"],
@@ -26,14 +29,19 @@ if (failures.length > 0) {
 }
 
 const productionCookies = getSupabaseAuthCookieOptions("senior.myacademy.my");
-if ("domain" in productionCookies) {
-  throw new Error("Senior auth cookies must not set Domain");
+if (productionCookies.domain !== ".myacademy.my") {
+  throw new Error("Senior production auth cookies must use Domain=.myacademy.my");
 }
-if (productionCookies.path !== "/" || productionCookies.sameSite !== "lax" || productionCookies.secure !== true) {
-  throw new Error("Senior production cookies must be Path=/ SameSite=lax Secure=true");
+if (
+  SUPABASE_AUTH_COOKIE_NAME !== "academy-auth-v1" ||
+  productionCookies.path !== "/" ||
+  productionCookies.sameSite !== "lax" ||
+  productionCookies.secure !== true
+) {
+  throw new Error("Senior production cookies must be academy-auth-v1 Path=/ SameSite=lax Secure=true");
 }
 
 const localCookies = getSupabaseAuthCookieOptions("localhost");
-if (localCookies.secure !== false || "domain" in localCookies) {
+if (localCookies.secure !== false || localCookies.domain !== undefined) {
   throw new Error("Localhost Senior cookies must be host-only and not Secure");
 }

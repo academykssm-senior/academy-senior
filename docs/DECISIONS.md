@@ -136,15 +136,15 @@ Each entry follows this format:
 - **Status:** Confirmed (amended by ADR-018)
 - **Date:** 2026-09-22
 - **Context:** ADR-001 kept Senior in a separate repository so Junior production stays untouched. Students still need one AcadeMY account. Phase 2A audit found a single live project (`aojrbxoqbgyxmfljqpqj`, API `https://aojrbxoqbgyxmfljqpqj.supabase.co`) already holding `auth.users`, `profiles`, and `user_progress`. Creating a second Auth system or second Supabase project would split identity.
-- **Decision:** Junior/Main and Senior remain separate codebases, deployments, and curriculum apps. Both use the **same existing Supabase project** and the **same `auth.users` identity**. Core profile (`profiles`, schools) may be queried where compatible. Product-specific learning progress and XP stay separately scoped. **Browser sessions are not shared.** The original wording that www owns Login and Senior consumes a `.myacademy.my` cookie is **superseded by ADR-018**.
+- **Decision:** Junior/Main and Senior remain separate codebases, deployments, and curriculum apps. Both use the **same existing Supabase project** and the **same `auth.users` identity**. Core profile (`profiles`, schools) may be queried where compatible. Product-specific learning progress and XP stay separately scoped. **Browser sessions are shared** through the parent-domain cookie described in ADR-018.
 - **Consequences:** Do not create a second Supabase project. Do not copy the Junior repository. Do not wire Senior UI to Junior-scoped XP RPCs until a later phase.
 
-### ADR-018: Independent Senior login — same project, host-only cookies
-- **Status:** Confirmed
+### ADR-018: Shared AcadeMY browser session
+- **Status:** Confirmed (amended 2026-09-25)
 - **Date:** 2026-09-22
-- **Context:** Sharing `auth.users` does not require sharing a browser session. A parent-domain cookie and redirects to `www.myacademy.my/login` blocked Senior from having its own entry and made local/production preview depend on Main SSO.
-- **Decision:** Senior has its own Login / Register / Forgot password / OAuth callback at `senior.myacademy.my`. Cookies are **host-only** (no `Domain=`). Unauthenticated protected routes redirect to Senior `/login?next=<relative path>`. Logout returns to Senior `/`. Google OAuth returns to `https://senior.myacademy.my/auth/callback`. Junior/Main keeps its own host-scoped cookies on www. Logging into Junior does not log the user into Senior; the same email can sign into both because `auth.users` is shared.
-- **Consequences:** Add Senior callback URLs in the existing Supabase Auth settings; do not remove Main redirect URLs. Do not set `Domain=.myacademy.my` in Senior.
+- **Context:** Junior and Senior use one Supabase Auth user. Junior already publishes that session as `academy-auth-v1` with `Domain=.myacademy.my`. A host-only Senior cookie cannot see it, so a student signed in at `www.myacademy.my` was asked to sign in again on `senior.myacademy.my`.
+- **Decision:** Junior and Senior intentionally share the AcadeMY browser session. Both clients use storage key `academy-auth-v1`, `base64url` chunking, `Path=/`, `SameSite=Lax`, and `Domain=.myacademy.my` with `Secure` on production hosts (`myacademy.my`, `www.myacademy.my`, `senior.myacademy.my`). Localhost stays host-only. Senior reads the existing session and loads `profiles` by `auth.users.id` (`claims.sub`). Senior does not create or upsert profiles. Senior still has its own `/login`, `/register`, `/forgot-password`, and `/auth/callback` until a later login cleanup. Logout clears the shared parent-domain cookie and any host-only copy of the same name.
+- **Consequences:** Do not set a different storage key or omit `Domain` on production writes. Do not change Junior to match Senior. A new Supabase project or a second profile row is out of scope. Register consolidation waits until this shared session is proven.
 
 ### ADR-016: Senior cinematic chrome — midnight navy and portal gold
 - **Status:** Confirmed
@@ -167,7 +167,7 @@ Each entry follows this format:
 
 ### TBD-003: Shared identity architecture
 - **Status:** ~~TBD~~ **RESOLVED — see ADR-017 and ADR-018**
-- Resolved: Shared `auth.users` + `profiles`. Each app has its own login UI and host-only cookies. Product-specific progress/XP remain separately scoped.
+- Resolved: Shared `auth.users` + `profiles`, and a shared `academy-auth-v1` browser session on `.myacademy.my`. Product-specific progress/XP remain separately scoped. Login UI cleanup is later.
 
 ### TBD-004: Hosting and deployment platform for Senior
 - **Status:** TBD

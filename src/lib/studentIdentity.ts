@@ -30,6 +30,15 @@ type ProgressLangRow = {
   language_preference: string | null;
 };
 
+/** Profile rows are keyed by the existing auth.users id. Do not invent a second id. */
+export function authenticatedUserIdFromClaims(
+  claims: { sub?: unknown } | null | undefined,
+): string | null {
+  const userId = claims?.sub;
+  if (typeof userId !== "string" || userId.length === 0) return null;
+  return userId;
+}
+
 export function mapAuthenticatedStudent(
   userId: string,
   authEmail: string | null,
