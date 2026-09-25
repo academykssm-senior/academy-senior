@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useRef } from "react";
 import { useAcademyJourney } from "@/animation/useAcademyJourney";
-import { AcademyEntrance } from "@/components/cinematic/AcademyEntrance";
 import { JourneyAstronaut } from "@/components/landing/JourneyAstronaut";
 import {
   ACTIVITY_CARDS,
@@ -37,11 +36,7 @@ export function SeniorHomepage({
         Skip to content
       </a>
       {isPublic ? null : <JourneyAstronaut astronautRef={astronautRef} />}
-      {isPublic ? (
-        <AcademyEntrance languagePreference={languagePreference} />
-      ) : (
-        <HeroSection languagePreference={languagePreference} variant={variant} />
-      )}
+      <HeroSection languagePreference={languagePreference} variant={variant} />
       <LearningSection languagePreference={languagePreference} />
       <ActivitiesSection />
       <CommitteeSection />

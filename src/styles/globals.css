@@ -135,6 +135,17 @@ html {
   background: #070b14;
 }
 
+html.academy-entrance-lock,
+html.academy-entrance-lock body {
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  max-height: 100svh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  scrollbar-gutter: auto;
+}
+
 body {
   font-family: var(--font-body);
   background-color: #070b14;
@@ -381,42 +392,95 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@keyframes academy-gate-drift {
-  from { transform: scale(1); }
-  to { transform: scale(1.02); }
-}
-
 @keyframes academy-lobby-push {
   from { transform: scale(1); }
   to { transform: scale(1.025); }
 }
 
-.academy-gate-drift {
-  animation: academy-gate-drift 32s ease-out forwards;
-}
-
-.academy-lobby-push {
-  animation: academy-lobby-push 42s linear forwards;
-}
-
-.academy-media {
+.academy-hero-image {
   position: absolute;
   inset: 0;
   height: 100%;
   width: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
+  transform: scale(1);
+  transform-origin: center center;
+  will-change: auto;
 }
 
-@media (max-width: 767px) {
-  .academy-gate-drift {
-    animation: none;
+@media (max-width: 639px) {
+  .academy-hero-image {
+    object-position: center center;
+  }
+}
+
+@media (max-height: 500px) {
+  .academy-hero-image {
+    object-position: center 68%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .academy-hero-image {
+    animation: academy-lobby-push 22s linear forwards;
+    will-change: transform;
+  }
+}
+
+.academy-hero-cta {
+  border: 1px solid rgb(255 255 255 / 22%);
+  background: rgb(7 11 20 / 42%);
+  color: #f4f1ea;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 22%);
+}
+
+.academy-hero-cta:hover {
+  border-color: rgb(232 184 74 / 50%);
+}
+
+.academy-hero-cta-primary {
+  border-color: rgb(232 184 74 / 45%);
+  background: rgb(232 184 74 / 18%);
+  color: #f4f1ea;
+  box-shadow:
+    0 8px 20px rgb(0 0 0 / 22%),
+    0 0 18px rgb(232 184 74 / 18%);
+}
+
+@media (min-width: 768px) {
+  .academy-hero-cta {
+    background: rgb(7 11 20 / 38%);
+    backdrop-filter: blur(8px);
+  }
+
+  .academy-hero-cta-primary {
+    background: rgb(232 184 74 / 22%);
+  }
+}
+
+.academy-explore-panel {
+  height: 100%;
+  max-height: 100%;
+}
+
+.academy-explore-panel .overscroll-contain {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(232 184 74 / 35%) transparent;
+}
+
+@media (max-height: 520px) {
+  .academy-gateway-copy {
+    padding-top: 0.5rem;
+  }
+
+  .academy-gateway-copy p:first-child {
+    font-size: clamp(1rem, 3.6vh, 1.5rem);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .academy-gate-drift,
-  .academy-lobby-push {
+  .academy-hero-image {
     animation: none;
   }
 }

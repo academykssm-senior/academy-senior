@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SeniorHomepage } from "@/components/landing/SeniorHomepage";
+import { AcademyEntrance } from "@/components/cinematic/AcademyEntrance";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -13,11 +13,11 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [
-      { rel: "preload", href: "/cinematic/academy-entry-poster.webp", as: "image" },
+      { rel: "preload", href: "/images/senior-lobby.png", as: "image" },
     ],
   }),
 });
 
 function HomePage() {
-  return <SeniorHomepage variant="public" />;
+  return <AcademyEntrance />;
 }
